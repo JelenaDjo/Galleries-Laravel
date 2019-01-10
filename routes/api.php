@@ -13,6 +13,19 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group(['middleware' => ['auth:api']], function() {
+    Route::post('/galleries/{id}/comment', 'CommentController@addComment');
+    Route::post('/gallery', "GalleryController@addGallery"); // metodu u modelu jos  dodavanje 
+
+
+
 });
+
+Route::get('/galleries', 'GalleryController@getAllGalleries');
+Route::post('/login', 'UserController@login');
+Route::post('/register', 'UserController@register');
+
+
+
+
+
